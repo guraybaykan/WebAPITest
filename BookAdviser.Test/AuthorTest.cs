@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BookAdviser.Repository;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BookAdviser.Test
 {
@@ -27,6 +28,7 @@ namespace BookAdviser.Test
 
             var written = ba.Authors.Find(x =>x.Name.IndexOf("Oscar") != -1);
             bool flag = false;
+            written.Count();
             foreach(var i in written)
             {
                 flag = true;
