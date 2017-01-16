@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookAdviser.Repository
 {
-    public class AuthorRepository : BaseRepository<Author>, IAuthorRepository
+    internal class AuthorRepository : BaseRepository<Author>, IAuthorRepository
     {
         public AuthorRepository(DbContext context) :
             base(context)
