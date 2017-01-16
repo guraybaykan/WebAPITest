@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookAdviser.Repository.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,12 @@ namespace BookAdviser.Repository
         private BookAdviserEntities _bookAdviserContext;
 
         #region Repositories
-        private AuthorRepository _authorRepository;
-        public AuthorRepository Authors
+        private IAuthorRepository _authorRepository;
+        private ILanguageRepository _languageRepository;
+        private IBookRepository _bookRepository;
+        private IPublisherRepository _publisherRepository; 
+
+        public IAuthorRepository Authors
         {
             get
             {
@@ -23,7 +28,42 @@ namespace BookAdviser.Repository
                 return _authorRepository;
             }
         }
+        public ILanguageRepository LanguageRepository
+        {
+            get
+            {
+                if(_languageRepository == null)
+                {
+                    _languageRepository = new LanguageRepository(_bookAdviserContext);
+                }
+                return _languageRepository;
+            }
+        }
+        public IBookRepository BookRepository
+        {
+            get
+            {
+                if (_bookRepository == null)
+                {
+                    _bookRepository = new BookRepository(_bookAdviserContext);
+                }
+                return _bookRepository;
+            }
+        }
+        public IPublisherRepository PublisherRepository
+        {
+            get
+            {
+                if (_publisherRepository == null)
+                {
+                    _publisherRepository = new PublisherRepository(_bookAdviserContext);
+                }
+                return _publisherRepository;
+            }
+        }
+
         #endregion
+
         public BookAdviserUnitOfWork()
         {
             _bookAdviserContext = new BookAdviserEntities();

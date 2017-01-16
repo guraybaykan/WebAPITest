@@ -54,6 +54,10 @@
       <DependentUpon>BookAdviserModel.tt</DependentUpon>
     </Compile>
     <Compile Include="BookStoreUnitOfWork.cs" />
+    <Compile Include="Interfaces\IPublisherRepository.cs" />
+    <Compile Include="Interfaces\ILanguageRepository.cs" />
+    <Compile Include="Interfaces\IBookRepository.cs" />
+    <Compile Include="Interfaces\IAuthorRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Repositiories\AuthorRepository.cs" />
     <Compile Include="Book.cs">

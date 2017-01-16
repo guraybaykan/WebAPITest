@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookAdviser.Repository.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookAdviser.Repository
 {
-    public class PublisherRepository : BaseRepository<Publisher>
+    internal class PublisherRepository : BaseRepository<Publisher>, IPublisherRepository
     {
         public PublisherRepository(DbContext context) :
             base(context)

@@ -13,7 +13,7 @@ namespace BookAdviser.Repository
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BookAdviserEntities : DbContext
+    internal partial class BookAdviserEntities : DbContext
     {
         public BookAdviserEntities()
             : base("name=BookAdviserEntities")
