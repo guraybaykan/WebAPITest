@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,30 +13,32 @@ namespace BookAdviser.Repository
     {
         DbContext _context;
         DbSet<T> _dbSet;
-        public BaseRepository() 
+        public BaseRepository(DbContext context)
         {
-            _context = new BookAdviserEntities();
+            _context = context;
             _dbSet = _context.Set<T>();
         }
 
         public virtual T Get(int id)
         {
-            return _dbSet.Find(id);            
+            return _dbSet.Find(id);
         }
-        public virtual IQueryable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return _dbSet.Where<T>(x => true);
         }
-        public virtual void Save(T entity)
+        public virtual void Add(T entity)
         {
             _dbSet.Add(entity);
-            _context.SaveChanges();
         }
-        public virtual void Update(T entity)
+        public virtual void Add(IEnumerable<T> entities)
         {
-            _dbSet.Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
-            _context.SaveChanges();
+            _dbSet.AddRange(entities);
+        }
+        public virtual void Delete(int id)
+        {
+            T entityToDelete = _dbSet.Find(id);
+            Delete(entityToDelete);
         }
         public virtual void Delete(T entity)
         {
@@ -43,13 +47,14 @@ namespace BookAdviser.Repository
                 _dbSet.Attach(entity);
             }
             _dbSet.Remove(entity);
-            _context.SaveChanges();
         }
-        public virtual void Delete(int id)
+        public virtual void Delete(IEnumerable<T> entities)
         {
-            T entityToDelete = _dbSet.Find(id);
-            Delete(entityToDelete);
-            _context.SaveChanges();
+            _dbSet.RemoveRange(entities);
+        }
+        public IEnumerable<T> Find(Expression<Func<T, bool>> expr)
+        {
+            return _dbSet.Where<T>(expr);
         }
     }
 }

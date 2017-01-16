@@ -10,16 +10,16 @@ namespace BookAdviser.API.Controllers
 {
     public class AuthorController : ApiController
     {
-        AuthorRepository _repo = new AuthorRepository();
-        public IEnumerable<Author> Get()
-        {
+        //AuthorRepository _repo = new AuthorRepository();
+        //public IEnumerable<Author> Get()
+        //{
 
-            return _repo.GetAll();
-        }
+        //    return _repo.GetAll();
+        //}
 
-        public void Put(Author author)
-        {
-            _repo.Save(author);
-        }
+        //public void Put(Author author)
+        //{
+        //    _repo.Save(author);
+        //}
     }
 }
