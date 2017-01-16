@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookAdviser.Repository", "B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookAdviser.Test", "BookAdviser.Test\BookAdviser.Test.csproj", "{CCEB7B5A-530F-47A5-95E4-DD2CA61EFB62}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseInit", "DatabaseInit", "{2AAF3B6F-9598-4246-8474-DA54ECB9F671}"
+	ProjectSection(SolutionItems) = preProject
+		InitDatabase-2012.sql = InitDatabase-2012.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
