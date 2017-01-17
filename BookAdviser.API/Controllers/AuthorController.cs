@@ -11,11 +11,11 @@ namespace BookAdviser.API.Controllers
     public class AuthorController : ApiController
     {
         //AuthorRepository _repo = new AuthorRepository();
-        //public IEnumerable<Author> Get()
-        //{
-
-        //    return _repo.GetAll();
-        //}
+        public IEnumerable<Author> Get()
+        {
+            BookAdviserUnitOfWork work = new BookAdviserUnitOfWork();
+            return work.Authors.GetAll();
+        }
 
         //public void Put(Author author)
         //{

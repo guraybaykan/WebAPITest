@@ -28,7 +28,7 @@ namespace BookAdviser.Repository
                 return _authorRepository;
             }
         }
-        public ILanguageRepository LanguageRepository
+        public ILanguageRepository Languages
         {
             get
             {
@@ -39,7 +39,7 @@ namespace BookAdviser.Repository
                 return _languageRepository;
             }
         }
-        public IBookRepository BookRepository
+        public IBookRepository Books
         {
             get
             {
@@ -50,7 +50,7 @@ namespace BookAdviser.Repository
                 return _bookRepository;
             }
         }
-        public IPublisherRepository PublisherRepository
+        public IPublisherRepository Publishers
         {
             get
             {
