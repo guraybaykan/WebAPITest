@@ -17,7 +17,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="AuthorID" Type="int" Nullable="false" />
           <Property Name="PublisherID" Type="int" Nullable="false" />
           <Property Name="Abstract" Type="nvarchar(max)" />
@@ -34,12 +34,37 @@
           <Property Name="ID" Type="char" MaxLength="2" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="List">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="ListBook">
+          <Key>
+            <PropertyRef Name="ListID" />
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="ListID" Type="int" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Publisher">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <Association Name="FK_Book_Author">
           <End Role="Author" Type="Self.Author" Multiplicity="1" />
@@ -89,11 +114,50 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_List_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="List" Type="Self.List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="List">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListBook_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="ListBook" Type="Self.ListBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ListBook">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListBook_List">
+          <End Role="List" Type="Self.List" Multiplicity="1" />
+          <End Role="ListBook" Type="Self.ListBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="List">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ListBook">
+              <PropertyRef Name="ListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BookAdviserModelStoreContainer">
           <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="List" EntityType="Self.List" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListBook" EntityType="Self.ListBook" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Book_Author" Association="Self.FK_Book_Author">
             <End Role="Author" EntitySet="Author" />
             <End Role="Book" EntitySet="Book" />
@@ -109,6 +173,18 @@
           <AssociationSet Name="FK_Book_Publisher2" Association="Self.FK_Book_Publisher2">
             <End Role="Publisher" EntitySet="Publisher" />
             <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_List_User" Association="Self.FK_List_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="List" EntitySet="List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListBook_Book" Association="Self.FK_ListBook_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="ListBook" EntitySet="ListBook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListBook_List" Association="Self.FK_ListBook_List">
+            <End Role="List" EntitySet="List" />
+            <End Role="ListBook" EntitySet="ListBook" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -129,7 +205,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AuthorID" Type="Int32" Nullable="false" />
           <Property Name="PublisherID" Type="Int32" Nullable="false" />
           <Property Name="Abstract" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -195,7 +271,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BookAdviserEntities" annotation:LazyLoadingEnabled="true" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+        <EntityContainer Name="BookAdviserEntities" annotation:LazyLoadingEnabled="true" a:TypeAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <EntitySet Name="Authors" EntityType="Self.Author" />
           <EntitySet Name="Books" EntityType="Self.Book" />
           <EntitySet Name="Languages" EntityType="Self.Language" />
@@ -216,7 +292,17 @@
             <End Role="Author" EntitySet="Authors" />
             <End Role="Book" EntitySet="Books" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Lists" EntityType="BookAdviserModel.List" />
+          <EntitySet Name="Users" EntityType="BookAdviserModel.User" />
+          <AssociationSet Name="FK_List_User" Association="BookAdviserModel.FK_List_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="List" EntitySet="Lists" />
+          </AssociationSet>
+          <AssociationSet Name="ListBook" Association="BookAdviserModel.ListBook">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="List" EntitySet="Lists" />
+          </AssociationSet>
+          </EntityContainer>
         <Association Name="FK_Book_Author1">
           <End Type="BookAdviserModel.Author" Role="Author" Multiplicity="0..1" />
           <End Type="BookAdviserModel.Book" Role="Book" Multiplicity="*" />
@@ -229,7 +315,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="List">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="BookAdviserModel.FK_List_User" FromRole="List" ToRole="User" />
+          <NavigationProperty Name="Books" Relationship="BookAdviserModel.ListBook" FromRole="List" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Lists" Relationship="BookAdviserModel.FK_List_User" FromRole="User" ToRole="List" />
+        </EntityType>
+        <Association Name="FK_List_User">
+          <End Type="BookAdviserModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="BookAdviserModel.List" Role="List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="List">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ListBook">
+          <End Type="BookAdviserModel.Book" Role="Book" Multiplicity="*" />
+          <End Type="BookAdviserModel.List" Role="List" Multiplicity="*" />
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -275,6 +397,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Lists">
+            <EntityTypeMapping TypeName="BookAdviserModel.List">
+              <MappingFragment StoreEntitySet="List">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BookAdviserModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ListBook" TypeName="BookAdviserModel.ListBook" StoreEntitySet="ListBook">
+            <EndProperty Name="List">
+              <ScalarProperty Name="ID" ColumnName="ListID" />
+            </EndProperty>
+            <EndProperty Name="Book">
+              <ScalarProperty Name="ID" ColumnName="BookID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

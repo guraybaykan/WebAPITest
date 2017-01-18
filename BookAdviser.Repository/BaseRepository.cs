@@ -52,7 +52,7 @@ namespace BookAdviser.Repository
         {
             _dbSet.RemoveRange(entities);
         }
-        public IEnumerable<T> Find(Expression<Func<T, bool>> expr)
+        public virtual IEnumerable<T> Find(Expression<Func<T, bool>> expr)
         {
             return _dbSet.Where<T>(expr);
         }

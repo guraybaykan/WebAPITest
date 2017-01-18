@@ -1,6 +1,6 @@
 ﻿USE [master]
 GO
-/****** Object:  Database [BookAdviser]    Script Date: 16.1.2017 17:46:51 ******/
+/****** Object:  Database [BookAdviser]    Script Date: 18.1.2017 16:11:44 ******/
 CREATE DATABASE [BookAdviser]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -77,7 +77,7 @@ EXEC sys.sp_db_vardecimal_storage_format N'BookAdviser', N'ON'
 GO
 USE [BookAdviser]
 GO
-/****** Object:  Table [dbo].[Author]    Script Date: 16.1.2017 17:46:51 ******/
+/****** Object:  Table [dbo].[Author]    Script Date: 18.1.2017 16:11:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -92,7 +92,7 @@ CREATE TABLE [dbo].[Author](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Book]    Script Date: 16.1.2017 17:46:51 ******/
+/****** Object:  Table [dbo].[Book]    Script Date: 18.1.2017 16:11:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -101,7 +101,7 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[Book](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [nchar](10) NOT NULL,
+	[Name] [nvarchar](250) NOT NULL,
 	[AuthorID] [int] NOT NULL,
 	[PublisherID] [int] NOT NULL,
 	[Abstract] [nvarchar](max) NULL,
@@ -119,7 +119,7 @@ CREATE TABLE [dbo].[Book](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Language]    Script Date: 16.1.2017 17:46:51 ******/
+/****** Object:  Table [dbo].[Language]    Script Date: 18.1.2017 16:11:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -138,7 +138,39 @@ CREATE TABLE [dbo].[Language](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Publisher]    Script Date: 16.1.2017 17:46:51 ******/
+/****** Object:  Table [dbo].[List]    Script Date: 18.1.2017 16:11:44 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[List](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](250) NULL,
+	[UserID] [int] NULL,
+ CONSTRAINT [PK_BookList] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[ListBook]    Script Date: 18.1.2017 16:11:44 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ListBook](
+	[ListID] [int] NOT NULL,
+	[BookID] [int] NOT NULL,
+ CONSTRAINT [PK_ListBook_1] PRIMARY KEY CLUSTERED 
+(
+	[ListID] ASC,
+	[BookID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Publisher]    Script Date: 18.1.2017 16:11:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -153,11 +185,22 @@ CREATE TABLE [dbo].[Publisher](
 ) ON [PRIMARY]
 
 GO
-INSERT [dbo].[Language] ([ID], [Name]) VALUES (N'DE', N'Almanca')
+/****** Object:  Table [dbo].[User]    Script Date: 18.1.2017 16:11:44 ******/
+SET ANSI_NULLS ON
 GO
-INSERT [dbo].[Language] ([ID], [Name]) VALUES (N'EN', N'İngilizce')
+SET QUOTED_IDENTIFIER ON
 GO
-INSERT [dbo].[Language] ([ID], [Name]) VALUES (N'TR', N'Türkçe')
+CREATE TABLE [dbo].[User](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Password] [nvarchar](50) NOT NULL,
+	[Email] [nvarchar](150) NOT NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
 GO
 ALTER TABLE [dbo].[Book]  WITH CHECK ADD  CONSTRAINT [FK_Book_Author] FOREIGN KEY([AuthorID])
 REFERENCES [dbo].[Author] ([ID])
@@ -178,6 +221,21 @@ ALTER TABLE [dbo].[Book]  WITH CHECK ADD  CONSTRAINT [FK_Book_Publisher2] FOREIG
 REFERENCES [dbo].[Publisher] ([ID])
 GO
 ALTER TABLE [dbo].[Book] CHECK CONSTRAINT [FK_Book_Publisher2]
+GO
+ALTER TABLE [dbo].[List]  WITH CHECK ADD  CONSTRAINT [FK_List_User] FOREIGN KEY([UserID])
+REFERENCES [dbo].[User] ([ID])
+GO
+ALTER TABLE [dbo].[List] CHECK CONSTRAINT [FK_List_User]
+GO
+ALTER TABLE [dbo].[ListBook]  WITH CHECK ADD  CONSTRAINT [FK_ListBook_Book] FOREIGN KEY([BookID])
+REFERENCES [dbo].[Book] ([ID])
+GO
+ALTER TABLE [dbo].[ListBook] CHECK CONSTRAINT [FK_ListBook_Book]
+GO
+ALTER TABLE [dbo].[ListBook]  WITH CHECK ADD  CONSTRAINT [FK_ListBook_List] FOREIGN KEY([ListID])
+REFERENCES [dbo].[List] ([ID])
+GO
+ALTER TABLE [dbo].[ListBook] CHECK CONSTRAINT [FK_ListBook_List]
 GO
 USE [master]
 GO

@@ -13,7 +13,7 @@ namespace BookAdviser.Repository
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    internal partial class BookAdviserEntities : DbContext
+    public partial class BookAdviserEntities : DbContext
     {
         public BookAdviserEntities()
             : base("name=BookAdviserEntities")
@@ -29,5 +29,7 @@ namespace BookAdviser.Repository
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<Publisher> Publishers { get; set; }
+        public virtual DbSet<List> Lists { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }
