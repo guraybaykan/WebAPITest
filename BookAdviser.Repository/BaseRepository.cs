@@ -11,8 +11,8 @@ namespace BookAdviser.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        DbContext _context;
-        DbSet<T> _dbSet;
+        protected DbContext _context;
+        protected DbSet<T> _dbSet;
         public BaseRepository(DbContext context)
         {
             _context = context;
@@ -56,5 +56,7 @@ namespace BookAdviser.Repository
         {
             return _dbSet.Where<T>(expr);
         }
+     
+
     }
 }

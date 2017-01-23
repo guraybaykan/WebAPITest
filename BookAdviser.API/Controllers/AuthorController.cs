@@ -1,25 +1,53 @@
-﻿using BookAdviser.Repository;
+﻿using BookAdviser.Model.DTO;
+using BookAdviser.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Services;
 
 namespace BookAdviser.API.Controllers
 {
     public class AuthorController : ApiController
     {
-        //AuthorRepository _repo = new AuthorRepository();
-        public IEnumerable<Author> Get()
+        AuthorService _as;
+        public AuthorController()
         {
-            BookAdviserUnitOfWork work = new BookAdviserUnitOfWork();
-            return work.Authors.GetAll();
+            _as = new AuthorService();
+        }
+ 
+
+        [WebMethod]
+        public IEnumerable<AuthorDTO> Get()
+        {
+           return _as.Get(); 
         }
 
-        //public void Put(Author author)
-        //{
-        //    _repo.Save(author);
-        //}
+        [WebMethod]
+        public AuthorDTO Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [WebMethod]
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        [WebMethod]
+        public void Post(AuthorDTO author)
+        {
+            _as.Save(author);
+        }
+        [WebMethod]
+        public void Put(AuthorDTO id)
+        {
+            
+        }
+
     }
 }

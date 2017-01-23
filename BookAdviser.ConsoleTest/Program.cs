@@ -13,33 +13,33 @@ namespace BookAdviser.ConsoleTest
         {
             using (BookAdviserEntities context = new BookAdviserEntities())
             {
-                User u = new User();
-                u.Name = "asdf";
-                u.Email = "sinem@sinem.com";
-                u.Password = "5";
+                //User u = new User();
+                //u.Name = "asdf";
+                //u.Email = "sinem@sinem.com";
+                //u.Password = "5";
 
-                List l = new List
-                {
-                    Name = "lisreyte",
+                //List l = new List
+                //{
+                //    Name = "lisreyte",
 
-                };
+                //};
 
-                var book = context.Books.FirstOrDefault(x => x.ID == 1);
-                l.Books.Add(book);
-                l.User = u;
-                context.Users.Add(u);
-                context.Lists.Add(l);
-                context.SaveChanges();
+                //var book = context.Books.FirstOrDefault(x => x.ID == 1);
+                //l.Books.Add(book);
+                //l.User = u;
+                //context.Users.Add(u);
+                //context.Lists.Add(l);
+                //context.SaveChanges();
 
 
-                var r = context.Lists.FirstOrDefault();
-                r.Books.Remove(r.Books.FirstOrDefault());
+                //var r = context.Lists.FirstOrDefault();
+                //r.Books.Remove(r.Books.FirstOrDefault());
             }
 
             try
             {
                 BookAdviserUnitOfWork work = new BookAdviserUnitOfWork();
-                var books = work.Books.GetAll();
+                var books = work.Books.GetLang("TR");
 
                 List<BookDTO> dtos = new List<BookDTO>();
 

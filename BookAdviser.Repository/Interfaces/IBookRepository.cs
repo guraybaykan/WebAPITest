@@ -8,6 +8,8 @@ namespace BookAdviser.Repository.Interfaces
 {
     public interface IBookRepository : IBaseRepository<Book>
     {
-
+        Book Get(string ISBN);
+        IEnumerable<Book> GetLang(string Lang);
+        IEnumerable<Book> GetByPriceRange(decimal LowerPrice, decimal UpperPrice);
     }
 }

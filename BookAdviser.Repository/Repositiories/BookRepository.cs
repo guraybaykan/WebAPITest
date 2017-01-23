@@ -15,5 +15,19 @@ namespace BookAdviser.Repository
         {
 
         }
+
+        public Book Get(string ISBN)
+        {
+            return _dbSet.FirstOrDefault(x => x.ISBN == ISBN);
+        }
+
+        public IEnumerable<Book> GetLang(string Lang)
+        {
+            return _dbSet.Where(x => x.LanguageID == Lang);
+        }
+        public IEnumerable<Book> GetByPriceRange(decimal LowerPrice,decimal UpperPrice)
+        {
+            return _dbSet.Where(x => x.Price >= LowerPrice && x.Price <= UpperPrice);
+        }
     }
 }

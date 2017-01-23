@@ -53,6 +53,7 @@ namespace BookAdviser.Model.DTO
 
         //    return dto;
         //}
+        public int ID { get; set; }
         public string Name { get; set; }
         public string AuthorName { get; set; }
         public string Publisher { get; set; }
