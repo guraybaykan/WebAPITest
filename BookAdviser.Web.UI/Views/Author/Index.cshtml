@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/ng_Controllers/AuthorController.js"></script>
+
+<h2>Yazarlar</h2>
+
+<a href="/Author/Create" class="btn btn-primary">Yeni Kayıt</a>
+<div ng-app="App" ng-controller="AuthorControl">
+    <table class="table table-hover">
+        <tr>
+            <th>Yazar Adı</th>
+            <th>Düzenle</th>
+            <th>Sil</th>
+        </tr>
+        <tr ng-repeat="x in Authors">
+            <td>{{x.Name}}</td>
+            <td><a href="/Author/Edit/{{x.ID}}" class="btn btn-primary">Düzenle</a></td>
+            <td><input type="button" class="btn btn-primary" value="Sil" ng-click="deleteAuthor(x.ID)" /></td>
+        </tr>
+    </table>
+</div>
+
+
+

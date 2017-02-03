@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<script>
+
+    app.controller('BookControl', function ($scope, $http) {
+        $http.get("http://localhost:34266/api/Book")
+      .then(function (response) {
+          $scope.books = response.data;
+      })
+    });
+</script>
+
+<div ng-app="App" ng-controller="BookControl">
+    <table class="table table-hover">
+        <tr>
+            <th>Name</th>
+            <th>AuthorName</th>
+            <th>Publisher</th>
+            <th>Language</th>
+            <th>PublishYear</th>
+            <th>Price</th>
+        </tr>
+        <tr ng-repeat="x in books">
+            <td>{{x.Name}}</td>
+            <td>{{x.AuthorName}}</td>
+            <td>{{x.Publisher}}</td>
+            <td>{{x.Language}}</td>
+            <td>{{x.PublishYear}}</td>
+            <td>{{x.Price}}</td>
+
+        </tr>
+    </table>
+</div>
+

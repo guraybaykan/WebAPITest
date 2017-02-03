@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/ng_Controllers/AuthorController.js"></script>
+<h2>Edit</h2>
+
+
+
+<div ng-app="App" ng-controller="AuthorControl" ng-init="getAuthor(@Html.DisplayForModel())">
+
+    <input type="text" ng-model="Author.Name" />
+    <input type="button" ng-click="editAuthor()" value="Edit" />
+
+</div>
+

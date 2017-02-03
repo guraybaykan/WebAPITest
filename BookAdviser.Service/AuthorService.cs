@@ -20,10 +20,29 @@ namespace BookAdviser.Service
         {
           return  _uow.Authors.GetAll().Select(x=>x.GetAuthorDTO());
         }
+        public AuthorDTO Get(int id)
+        {
+            return _uow.Authors.Get(id).GetAuthorDTO();
+        }
 
         public void Save(AuthorDTO author)
         {
-            _uow.Authors.Add(author.GetAuthor());
+            if(author.ID == 0)
+            {
+                _uow.Authors.Add(author.GetAuthor());
+            }
+            else
+            {
+                var record = _uow.Authors.Get(author.ID);
+                record.Name = author.Name;
+            }
+
+            _uow.Complete();
+        }
+
+        public void Delete(int id)
+        {
+            _uow.Authors.Delete(id);
             _uow.Complete();
         }
      

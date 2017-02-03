@@ -20,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookAdviser.Service", "Book
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookAdviser.Model.DTO", "BookAdviser.Model.DTO\BookAdviser.Model.DTO.csproj", "{C091EC74-913E-4F2C-B8C7-6D1B5CDCADC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookAdviser.Web.UI", "MvcApplication1\BookAdviser.Web.UI.csproj", "{6ED39DF0-DD20-413A-94D7-7131078AB8CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookAdviser.Web.UI", "BookAdviser.Web.UI\BookAdviser.Web.UI.csproj", "{524771E5-4302-4B0C-89E8-D2133A4AFFAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,10 +52,10 @@ Global
 		{C091EC74-913E-4F2C-B8C7-6D1B5CDCADC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C091EC74-913E-4F2C-B8C7-6D1B5CDCADC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C091EC74-913E-4F2C-B8C7-6D1B5CDCADC0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6ED39DF0-DD20-413A-94D7-7131078AB8CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6ED39DF0-DD20-413A-94D7-7131078AB8CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6ED39DF0-DD20-413A-94D7-7131078AB8CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6ED39DF0-DD20-413A-94D7-7131078AB8CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{524771E5-4302-4B0C-89E8-D2133A4AFFAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{524771E5-4302-4B0C-89E8-D2133A4AFFAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{524771E5-4302-4B0C-89E8-D2133A4AFFAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{524771E5-4302-4B0C-89E8-D2133A4AFFAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
