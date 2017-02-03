@@ -18,7 +18,7 @@ namespace BookAdviser.API.Controllers
             _as = new AuthorService();
         }
  
-
+        [Authorize]
         [WebMethod]
         public IEnumerable<AuthorDTO> Get()
         {

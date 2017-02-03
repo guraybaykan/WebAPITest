@@ -11,7 +11,7 @@ namespace BookAdviser.ConsoleTest
     {
         static void Main(string[] args)
         {
-            using (BookAdviserEntities context = new BookAdviserEntities())
+            //using (BookAdviserEntities context = new BookAdviserEntities())
             {
                 //User u = new User();
                 //u.Name = "asdf";

@@ -57,6 +57,7 @@
       <DependentUpon>BookAdviserModel.tt</DependentUpon>
     </Compile>
     <Compile Include="BookStoreUnitOfWork.cs" />
+    <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Interfaces\IPublisherRepository.cs" />
     <Compile Include="Interfaces\ILanguageRepository.cs" />
     <Compile Include="Interfaces\IBookRepository.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Publisher.cs">
       <DependentUpon>BookAdviserModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repositiories\UserRepository.cs" />
     <Compile Include="Repositiories\AuthorRepository.cs" />
     <Compile Include="BookAdviserModel.Context.cs">
       <AutoGen>True</AutoGen>

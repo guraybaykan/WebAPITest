@@ -1,5 +1,8 @@
 ﻿USE [master]
 GO
+DROP DATABASE [BookAdviser]
+
+GO
 /****** Object:  Database [BookAdviser]    Script Date: 18.1.2017 16:11:44 ******/
 CREATE DATABASE [BookAdviser]
  CONTAINMENT = NONE

@@ -46,6 +46,15 @@ namespace BookAdviser.Service.DTOMapping
            };
            return author;
        }
+
+       public static UserDTO GetUserDTO(this User user)
+       {
+           return new UserDTO
+           {
+               Name = user.Name,
+               Password = user.Password
+           };
+       }
     }
 
 }

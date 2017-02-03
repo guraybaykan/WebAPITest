@@ -15,7 +15,8 @@ namespace BookAdviser.Repository
         private IAuthorRepository _authorRepository;
         private ILanguageRepository _languageRepository;
         private IBookRepository _bookRepository;
-        private IPublisherRepository _publisherRepository; 
+        private IPublisherRepository _publisherRepository;
+        private IUserRepository _userRepository;
 
         public IAuthorRepository Authors
         {
@@ -59,6 +60,18 @@ namespace BookAdviser.Repository
                     _publisherRepository = new PublisherRepository(_bookAdviserContext);
                 }
                 return _publisherRepository;
+            }
+        }
+
+        public IUserRepository Users
+        {
+            get
+            {
+                if (_userRepository == null)
+                {
+                    _userRepository = new UserRepository(_bookAdviserContext);
+                }
+                return _userRepository;
             }
         }
 
