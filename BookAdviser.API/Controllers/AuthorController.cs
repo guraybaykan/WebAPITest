@@ -18,7 +18,7 @@ namespace BookAdviser.API.Controllers
             _as = new AuthorService();
         }
  
-        [Authorize]
+        
         [WebMethod]
         public IEnumerable<AuthorDTO> Get()
         {
@@ -28,13 +28,13 @@ namespace BookAdviser.API.Controllers
         [WebMethod]
         public AuthorDTO Get(int id)
         {
-            throw new NotImplementedException();
+            return _as.Get(id);
         }
 
         [WebMethod]
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _as.Delete(id);
         }
 
 
@@ -44,8 +44,9 @@ namespace BookAdviser.API.Controllers
             _as.Save(author);
         }
         [WebMethod]
-        public void Put(AuthorDTO id)
+        public void Put(AuthorDTO author)
         {
+            _as.Save(author);
             
         }
 
